@@ -1,6 +1,8 @@
 package com.rickwan.bankcard.verify.utils;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 
 import com.rickwan.bankcard.verify.data.Bank;
@@ -15,7 +17,7 @@ public class BankVerifyUtils {
     private static int DEFAULT_COUNT = 6;//默认6位开始验证银行卡
 
 
-    public static void verifyBankCard(final Context context, String cardNumber, final BankCardVerifyListener verifyListener) {
+    public static  void verifyBankCard(Context context,String cardNumber, final BankCardVerifyListener verifyListener) {
 
 
         if (verifyListener == null) {
@@ -36,9 +38,16 @@ public class BankVerifyUtils {
 
         XMLParserUtils.parse(context, cardNumber.substring(0, DEFAULT_COUNT), new XMLParserUtils.OnParseBankCallback() {
             @Override
-            public void onCallback(Bank bank) {
+            public void onCallback(final Bank bank) {
 
-                verifyListener.verify(bank);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        verifyListener.verify(bank);
+
+                    }
+                });
 
             }
         });
@@ -48,4 +57,8 @@ public class BankVerifyUtils {
     public interface BankCardVerifyListener {
         void verify(Bank bank);
     }
+
+
+
+
 }
