@@ -18,7 +18,7 @@
 - Step 2. Add the dependency：
 ```
   dependencies {
-	    compile 'com.github.Rickwan:BankCardUtils:V1.0.2'
+	    compile 'com.github.Rickwan:BankCardUtils:V1.0.1'
 	}
 ```
 ------
