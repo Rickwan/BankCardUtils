@@ -35,29 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void verify() {
-
-//        String cardNumber = "6225881289141234";
-
-        String input = intputView.getText().toString();
-
-        BankUtils verifyUtils = new BankUtils(this);
-        verifyUtils.setBankCardVerifyListener(new BankUtils.BankCardVerifyListener() {
-            @Override
-            public void verify(Bank bank) {
-                if (bank == null) {
-                    cardView.setText("银行卡无效");
-                } else {
-                    cardView.setText("银行卡类型:" + bank.card_type + "\n银行卡名称:" + bank.bank_name);
-                }
-            }
-        });
-
-        verifyUtils.verifyBankCard(input);
-
-    }
-
-    private void verifyBankCard(){
+    private void verifyBankCard() {
         String input = intputView.getText().toString();
         BankVerifyUtils.verifyBankCard(this, input, new BankVerifyUtils.BankCardVerifyListener() {
             @Override
