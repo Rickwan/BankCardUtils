@@ -18,7 +18,7 @@
 - Step 2. Add the dependency：
 ```
   dependencies {
-	    compile 'com.github.Rickwan:BankCardUtils:V1.0.0'
+	    compile 'com.github.Rickwan:BankCardUtils:V1.0.1'
 	}
 ```
 ------
@@ -26,20 +26,12 @@
 ```
      BankVerifyUtils.verifyBankCard(this, input, new BankVerifyUtils.BankCardVerifyListener() {
             @Override
-            public void verify(final Bank bank) {
-
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (bank == null) {
-                            cardView.setText("银行卡无效");
-                        } else {
-                            cardView.setText("银行卡类型:" + bank.card_type + "\n银行卡名称:" + bank.bank_name);
-                        }
-                    }
-                });
-
+            public void verify(Bank bank) {
+                if (bank == null) {
+                    cardView.setText("银行卡无效");
+                } else {
+                    cardView.setText("银行卡类型:" + bank.card_type + "\n银行卡名称:" + bank.bank_name);
+                }
             }
 
         });
